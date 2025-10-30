@@ -1,51 +1,42 @@
 #include <iostream>
-#include <cmath>
-#include <iomanip>
+using namespace std;
 
+int main() {
+    const int N = 12; // розмір початкового масиву
+    double arr[N];    // вихідний масив
+    double odd[N / 2];  // масив для елементів з непарних позицій
+    double even[N / 2]; // масив для елементів з парних позицій
+    int oddCount = 0;
+    int evenCount = 0;
 
-const int SIZE = 12;
-const int HALF_SIZE = 6;
+    cout << "Введіть 12 дійсних чисел:\n";
+    for (int i = 0; i < N; i++) {
+        cin >> arr[i];
+    }
 
-void task1_array_split(const double original_array[SIZE], 
-                      double odd_pos_array[HALF_SIZE], 
-                      double even_pos_array[HALF_SIZE]) {
-    
-    int odd_count = 0;
-    int even_count = 0;
-
-    for (int i = 0; i < SIZE; i++) {
-        
-        
-        if (i % 2 == 0) {
-          
-            even_pos_array[even_count] = original_array[i];
-            even_count++;
+    // розділення елементів на два масиви
+    for (int i = 0; i < N; i++) {
+        if ((i + 1) % 2 == 1) {
+            // непарна позиція (1, 3, 5, ...)
+            odd[oddCount] = arr[i];
+            oddCount++;
         } else {
-         
-            odd_pos_array[odd_count] = original_array[i];
-            odd_count++;
+            // парна позиція (2, 4, 6, ...)
+            even[evenCount] = arr[i];
+            evenCount++;
         }
     }
-}
-int main() {
-    double A[SIZE] = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 
-                      7.7, 8.8, 9.9, 10.10, 11.11, 12.12};
-    
-    double B_odd[HALF_SIZE];  // Елементи з непарних індексів (2.2, 4.4, ...)
-    double C_even[HALF_SIZE]; // Елементи з парних індексів (1.1, 3.3, ...)
 
-    task1_array_split(A, B_odd, C_even);
-
-    std::cout << "--- Завдання 1 ---\n";
-    std::cout << "Масив B (Непарні індекси): ";
-    for (int i = 0; i < HALF_SIZE; i++) {
-        std::cout << std::fixed << std::setprecision(2) << B_odd[i] << " ";
+    cout << "\nЕлементи на непарних позиціях:\n";
+    for (int i = 0; i < oddCount; i++) {
+        cout << odd[i] << " ";
     }
-    std::cout << "\nМасив C (Парні індекси):   ";
-    for (int i = 0; i < HALF_SIZE; i++) {
-        std::cout << std::fixed << std::setprecision(2) << C_even[i] << " ";
-    }
-    std::cout << "\n\n";
 
+    cout << "\n\nЕлементи на парних позиціях:\n";
+    for (int i = 0; i < evenCount; i++) {
+        cout << even[i] << " ";
+    }
+
+    cout << endl;
     return 0;
 }
